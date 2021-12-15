@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Element | What should I look at?</title>
+
+    <style>
+        @import url("https://fonts.googleapis.com/css2?family=Bree+Serif&display=swap");
+        
+        body {
+            font-family: 'Bree Serif', serif;
+        }
+        .box {
+            width: 50%;
+            /* height: 75vh; */
+            margin: 0 auto;
+            padding: 1rem;
+
+            border: 2px solid black;
+        }
+
+        #head {
+            color: rgb(255, 36, 145);
+        }
+
+        #box-body {
+            /* height: 50vh; */
+            background-color: rgb(255, 218, 224);
+            padding: 1rem;
+            
+        }
+
+        #boxes {
+            padding: .2rem .2rem .2rem .2rem;
+            width: 50%;
+            margin: 0 auto;
+            border: 2px solid rgb(165, 165, 165);
+
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .box-inner {
+            /* border: 1px solid black; */
+            background-color: rgb(165, 165, 165);
+        }
+
+        @keyframes triggerframe {
+            from {
+                background-color: rgb(165, 165, 165);
+            }
+
+            to {
+                background-color: rgb(77, 77, 77);
+            }
+        }
+
+        .triggered {
+            animation: triggerframe 2s ease-in-out 0s infinite;
+            animation-direction: alternate;
+        }
+
+        #box-top, #row-1 {
+            height: 10vh;
+            width: 100%;
+
+            margin: 0 0 .08rem 0;
+        }
+
+        #row-1 {
+            height: 0vh;
+        }
+
+        @keyframes trigger-row-1 {
+            from {
+                height: 0rem;
+            }
+
+            to {
+                height: 5rem;
+            }
+        }
+        @keyframes un-trigger-row-1 {
+            from {
+                height: 5rem;
+            }
+
+            to {
+                height: 0rem;
+            }
+        }
+
+        .triggered-row-1 {
+            animation: trigger-row-1 .5s cubic-bezier(0, 1.45, 0.9, 1.93) 0s 1;
+            animation-fill-mode: forwards;
+        }
+
+        .un-triggered-row-1 {
+            animation: un-trigger-row-1 .5s ease 0s 1;
+            animation-fill-mode: forwards;
+        }
+
+        #row-2 {
+            height: 30vh;
+            width: 100%;
+
+            display: flex;
+            justify-content: space-between;
+        }
+
+        #box-left, #box-middle, #col-3 {
+            height: 100%;
+            width: 33%;
+        }
+
+        #col-3 {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        #box-right {
+            height: 75%;
+            width: 100%;
+        }
+
+        #box-right-bottom {
+            height: 24%;
+            width: 100%;
+            
+            background-color: rgb(77, 77, 77);
+
+            cursor: pointer;
+        }
+
+        #box-bottom {
+            height: 3vh;
+            width: 100%;
+
+            margin: .15rem 0 0 0;
+        }
+
+        h5 {
+            text-align: center;
+            color: white;
+            text-transform: uppercase;
+        }
+
+        #ans {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <div class="box">
+            <div id="head">
+                <h1>New Element</h1>
+                <p>Answers the question: <span id="ans">What should I look at?</span></p>
+            </div>
+            <hr>
+            <div id="box-body">
+                <div id="boxes">
+                    <div id="box-top" class="box-inner"></div>
+                    <div id="row-1" class="box-inner"></div>
+                    <div id="row-2">
+                        <div id="box-left" class="box-inner"></div>
+                        <div id="box-middle" class="box-inner"></div>
+                        <div id="col-3">
+                            <div id="box-right" class="box-inner"></div>
+                            <div id="box-right-bottom">
+                                <h5>Trigger</h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="box-bottom" class="box-inner"></div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        var trigger = document.getElementById("box-right-bottom");
+        var inner_boxes = document.querySelectorAll(".box-inner");
+        var row1 = document.getElementById("row-1");
+
+        trigger.addEventListener("click", function(event) {
+            inner_boxes.forEach(function(box) {
+                box.classList.toggle("triggered");
+            })
+            
+            console.log("before -- " + row1.classList)
+
+            // row1.classList.toggle("triggered-row-1");
+            // row1.classList.toggle("un-triggered-row-1");
+
+            // console.log("after -- " + row1.classList)
+
+
+            if(row1.classList.contains("triggered-row-1")) {
+                row1.classList.remove("triggered-row-1");
+                row1.classList.add("un-triggered-row-1");
+            }
+
+            else {
+                row1.classList.add("triggered-row-1");
+                row1.classList.remove("un-triggered-row-1");
+            }
+
+            console.log("after -- " + row1.classList);
+        })
+    </script>
+</body>
+</html>
